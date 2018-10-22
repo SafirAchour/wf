@@ -1,4 +1,5 @@
 <?php
+namespace src\DimensionalMath\Vector;
 
 function getVectorAngle($vectorA, $vectorB) {
    

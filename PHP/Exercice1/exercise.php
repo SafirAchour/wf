@@ -1,22 +1,35 @@
 <?php
+//NOT WHAT WAS ASKED
+/*
+$string = "test";
 
-$booleanTrue;
-$booleanFalse;
+$true_value = 1;
+$false_value = 0;
 
-$int;
+$booleanTrue =  $true_value;
+$booleanFalse = $false_value;
 
-$float;
+print ("true_value = " . $booleanTrue);
+print (" false_value = " . $booleanFalse);
+*/
 
-$integer;
+$booleanTrue = TRUE;
+$booleanFalse = FALSE;
 
-$double;
+$int = 1;
 
-$string;
+$float = 3.1415;
 
-$array;
+$integer = 5;
 
-$doubleDimenssionArray;
+$double = 15.123;
 
-$associativeArray;
+$string = 'Hello world';
 
-$null;
+$array = [1,2,3];
+
+$doubleDimenssionArray = [[1,2,3],[4,5,6]];
+
+$associativeArray = ['Num1' => 1, 'Num2' => 2];
+
+$null = null;
