@@ -1,21 +1,21 @@
 <?php 
 
 $config = include __DIR__ . '/../config/config.php';
-require __DIR__ . '/../model/Project.php';  // <=   ???
+require_once __DIR__.'/../model/Project.php';
 
 try {
     $projects = getAllProjects();
 } catch (Exception $e) {
-    echo 'An error occured with code : ' .$e->getMessage();
+    echo 'An error occured with code : '.$e->getMessage();
     exit;
 }
 
-var_dump($projects->fetchAll());
+include __DIR__ . '/../view/homepage.html.php';
 
 /*
 -> go in config and return config
 -> require project.php
-    ->  require connection.php
+    -> require connection.php
         -> create a connection
     -> define getAllProjects function
 -> call getAllProjects
@@ -23,5 +23,5 @@ var_dump($projects->fetchAll());
     -> return the result
 */
 
-    
-    
+
+
