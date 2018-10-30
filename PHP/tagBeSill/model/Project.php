@@ -28,3 +28,13 @@ function getAllProjects() {
     return $projects;
 }
 
+
+function createProject(string $title, string $description, int $statusId) {
+    global $connection;
+    
+    $statement = 'INSERT INTO Project (title, description, statusId) VALUE ';
+    
+    
+    
+    
+}

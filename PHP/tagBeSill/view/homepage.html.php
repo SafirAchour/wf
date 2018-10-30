@@ -1,5 +1,4 @@
 <?php
-$title = 'Tag be sill home page';
 
 $content = '<div class="container">';
 $content .= '<div class="row">';
@@ -56,4 +55,17 @@ EOT;
 $content .= '</div>';
 $content .= '</div>';
 
+$title = 'Tag be sill home page';
+
 include __DIR__ . '/Base.html.php';
+
+
+
+
+
+
+
+
+
+
+

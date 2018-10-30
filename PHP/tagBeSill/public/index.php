@@ -1,27 +1,33 @@
 <?php 
 
-$config = include __DIR__ . '/../config/config.php';
-require_once __DIR__.'/../model/Project.php';
+$suffix = __DIR__ . '/../controller/';
+$routing = [
+    $suffix . 'index.php' => ['/', ''],
+    $suffix . 'register.php' => ['/register.php'],
+    $suffix . 'login.php' => ['/login.php'],
+    $suffix . 'logout.php' => ['/logout.php'],
+    $suffix . 'random.php' => ['/random.php'],
+    $suffix . 'createProject.php' => ['/createProject.php']
+];
 
-try {
-    $projects = getAllProjects();
-} catch (Exception $e) {
-    echo 'An error occured with code : '.$e->getMessage();
-    exit;
+$url = $_SERVER['REQUEST_URI'];
+if (substr($url, 0, strlen('/index.php')) == '/index.php') {
+    $url = substr($url, strlen('/index.php'));
 }
 
-include __DIR__ . '/../view/homepage.html.php';
+if (strpos($url, '?')) {
+    $url = substr($url, 0, strpos($url, '?'));
+}
 
-/*
--> go in config and return config
--> require project.php
-    -> require connection.php
-        -> create a connection
-    -> define getAllProjects function
--> call getAllProjects
-    -> send a query
-    -> return the result
-*/
+$config = include __DIR__ .'/../config/config.php';
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
+foreach ($routing as $controller => $urls) {
+    if (in_array($url, $urls)) {
+        require_once $controller;
+    }
+}
 
-
+session_write_close();
