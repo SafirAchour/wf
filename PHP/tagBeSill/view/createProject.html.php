@@ -1,67 +1,65 @@
-<?php 
-$title = 'Create Project';
+<?php
 
-$statusDisplay = '';
-foreach ($status as $statusElement) {
-    $statusDisplay .= '<option value="'.$statusElement['id'].'">'.$statusElement['label'].'</option>';
+$title = 'TagBeSill create project';
+
+foreach (['status', 'category'] as $varName) {
+    ${$varName . 'Display'} = '';
+    foreach (${$varName . 'List'} as $element) {
+        ${$varName . 'Display'} .= '<option value="'.$element->id.'">'.$element->label.'</option>';
+    }
 }
 
-$categoryDisplay = '';
-foreach ($category as $categoryElement) {
-    $categoryDisplay .= '<option value="'.$categoryElement['id'].'">'.$categoryElement['label'].'</option>';
-}
+$errors = array_map(function(array $elements){
+    if (empty($elements)) {
+        return '';
+    }
+    return sprintf('<ul class="alert alert-danger">%s</ul>', implode('', $elements));
+}, $errors);
+list($titleErr, $descErr, $pictErr, $statusErr, $catErr, $pubErr) = array_values($errors);
 
-$content = <<< EOT
-<form>
-
-<div class="container"> 
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control" id="title" aria-describedby="titleHelp" name="title">
-    <small id="titleHelp" class="form-text text-muted">Enter project title</small>
-  </div>
-  
-  <div class="form-group">
-    <label for="description">Description</label>
-    <textarea class="form-control" id="description" aria-describedby="descriptionHelp" name="description"  ></textarea>
-    <small id="descriptionHelp" class="form-text text-muted">Enter project description</small>
-  </div>
-
-<form>
-  <div class="form-group">
-    <label for="image">Project image</label>
-    <input type="file" class="form-control-file" id="image" name="image">
-  </div>
-</form>
-
-
-
-
-  <div class="form-group">
-    <label for="projectStatus">Status</label>
-    <select class="form-control" id="projectStatus" name="projectStatus">
-       $statusDisplay
-    </select>
-  </div>
-  
-//USE  MULTIPLE SELECT -->
-PUT VALUE AND LABEL FOR OPTIONS
-CHECK AFTER BREAK
-ASK QUESTIONS...
-
-    <div class="form-group">
-    <label for="category">Project category</label>
-    <select multiple class="form-control" id="category" name="category">
-      $categoryDisplay
-    </select>
-  </div>
-
-
-
-
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
+$content = <<<EOT
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Project name</label>
+                <input type="text" class="form-control" name="title" id="title" />
+                $titleErr
+            </div>
+            <div class="form-group">
+                <label for="description">Project description</label>
+                <textarea class="form-control" name="description" id="description"></textarea>
+                $descErr
+            </div>
+            <div class="form-group">
+                <label for="picture">Project image</label>
+                <input type="file" name="picture" id="picture" />
+                $pictErr
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" name="status" id="status">
+                    $statusDisplay
+                </select>
+                $statusErr
+            </div>
+            <div class="form-group">
+                <label for="categories[]">Category</label>
+                <select multiple class="form-control" name="categories[]" id="categories">
+                    $categoryDisplay
+                </select>
+                $catErr
+            </div>
+            <div class="form-group">
+                <label for="published">Publish the project now</label>
+                <input type="checkbox" class="form-control" name="published" id="published" checked="checked"/>
+                $pubErr
+            </div>
+            <a href="/">
+                <button type="button" class="btn btn-success">Back</button>
+            </a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 EOT;
 
 include __DIR__ . '/Base.html.php';

@@ -1,9 +1,7 @@
 <IfModule mod_rewrite.c>
 	Options +FollowSymlinks
-	RewriteEngine On  
-	# Condition -> IF IT'S NOT FILE, REDIRECT TO index.php
-	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteEngine On
 	
-	RewriteRule ^(.*)$ /index.php [QSA,L]
-	#QUERY STRING APPEND LOAD
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ /index.php [QSA,L]
 </IfModule>

@@ -1,17 +1,14 @@
-<?php 
+<?php
 
 require_once __DIR__ . '/connection.php';
 
-function getAllStatus() {
+function findAllStatus() {
     global $connection;
-    
-    $query = 'SELECT * FROM Status';
-    $results = $connection->query($query);
-    
-    if (!$results) {
-        throw new LogicException($connection->errorCode());
+    $statement = 'SELECT * FROM Status';
+    $statusList = $connection->query($statement)->fetchAll(PDO::FETCH_CLASS, stdClass::class);
+    if ($statusList === false) {
+        throw new Exception($connection->errorCode());
     }
-    
-    return $results->fetchAll();
-}
 
+    return $statusList;
+}

@@ -6,5 +6,6 @@ return [
         'name'     => 'tagBeSill',
         'user'     => 'root',
         'password' => null
-    ]
+    ],
+    'public_path' => __DIR__ . '/../public'
 ];
